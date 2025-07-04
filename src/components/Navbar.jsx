@@ -30,7 +30,6 @@ export default function Navbar() {
         );
         
         const userInfo = JSON.parse(jsonPayload);
-        console.log('Decoded user info:', userInfo);
 
         // Store token and user data
         localStorage.setItem('token', credentialResponse.credential);
@@ -60,8 +59,6 @@ export default function Navbar() {
           }
           return res.json();
         });
-
-        console.log('Fetched user info:', userInfo);
 
         localStorage.setItem('token', credentialResponse.access_token);
         dispatch(setCredentials({
@@ -107,7 +104,7 @@ export default function Navbar() {
       localStorage.removeItem('token');
       setIsMenuOpen(false);
       navigate('/');
-      window.location.href = "http://localhost:5000/logout";
+      window.location.href = `${process.env.VITE_BACKEND_URL}/logout`;
     } catch (error) {
       console.error('Logout error:', error);
     }
