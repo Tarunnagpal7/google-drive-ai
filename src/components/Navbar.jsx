@@ -130,7 +130,11 @@ export default function Navbar() {
                 className="flex items-center space-x-3 group"
               >
                 <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-                  <FiHome size={18} className="text-white" />
+                  <img 
+                    src="/logo.png" 
+                    alt="Logo" 
+                    className="w-6 h-6 object-cover rounded-full"
+                  />
                 </div>
                 <span className="hidden sm:block text-lg font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                   DRIVE-AI
@@ -217,12 +221,12 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
           <div 
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/70"
             onClick={() => setIsMenuOpen(false)}
           />
           
           {/* Mobile Menu Panel */}
-          <div className="glass mt-4 mx-4 rounded-lg">
+          <div className="relative mt-4 mx-4 bg-gray-900/95 backdrop-blur-xl rounded-lg border border-white/20 shadow-2xl">
             <div className="px-4 py-6 space-y-4">
               
               {/* Mobile Navigation Links */}
@@ -239,11 +243,11 @@ export default function Navbar() {
               </div>
 
               {/* Mobile Auth Section */}
-              <div className="pt-4 border-t border-white/10">
+              <div className="pt-4 border-t border-white/20">
                 {isAuthenticated ? (
                   <div className="space-y-4">
                     {user && (
-                      <div className="flex items-center gap-3 p-4 bg-white/5 rounded-xl border border-white/10">
+                      <div className="flex items-center gap-3 p-4 bg-white/10 rounded-xl border border-white/20">
                         {user.picture ? (
                           <img 
                             src={user.picture} 
@@ -265,13 +269,6 @@ export default function Navbar() {
                         </div>
                       </div>
                     )}
-                    <button
-                      onClick={handleLogout}
-                      className="flex items-center justify-center space-x-2 w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 px-4 py-3 rounded-xl transition-all duration-200 text-white font-medium shadow-lg"
-                    >
-                      <FiLogOut size={20} />
-                      <span>Logout</span>
-                    </button>
                   </div>
                 ) : (
                   <div className="flex justify-center">
