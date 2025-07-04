@@ -3,7 +3,7 @@ const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 class AIService {
   // Generate AI suggestions for selected files
-  static async generateRenameSuggestions(selectedFiles) {
+  static async generateRenameSuggestions(selectedFiles,namingPattern = "") {
     try {
       const response = await fetch(`${API_BASE_URL}/ai/rename-preview`, {
         method: 'POST',
@@ -12,7 +12,8 @@ class AIService {
         },
         credentials: 'include', // Include session cookies
         body: JSON.stringify({
-          selectedFiles: selectedFiles
+          selectedFiles: selectedFiles,
+            pattern: namingPattern || null
         })
       });
 
@@ -93,6 +94,8 @@ export default function FileTree({ files, isLoading, onRefresh, setStatus }) {
   const [isGeneratingSuggestions, setIsGeneratingSuggestions] = useState(false);
   const [isExecutingRename, setIsExecutingRename] = useState(false);
   const [executionResults, setExecutionResults] = useState(null);
+  const [namingPattern, setNamingPattern] = useState('');
+
 
   const log = (message) => {
     const timestamp = new Date().toLocaleTimeString();
@@ -159,9 +162,11 @@ export default function FileTree({ files, isLoading, onRefresh, setStatus }) {
         name: files[id]?.label?.replace(/\s*\(.*\)$/, ''),
         type: files[id]?.label?.includes('(folder)') ? 'folder' : 'file'
       }));
+      
+      const suggestions = await AIService.generateRenameSuggestions(selectedFiles, namingPattern);
 
-      const suggestions = await AIService.generateRenameSuggestions(selectedFiles);
       setAiSuggestions(suggestions);
+      setNamingPattern("")
 
       if (suggestions.length === 0) {
         log("⚠️ No suggestions generated.");
@@ -376,55 +381,73 @@ export default function FileTree({ files, isLoading, onRefresh, setStatus }) {
         </div>
       </div>
 
-      {/* AI Controls */}
-      {selectedItems.size > 0 && (
-        <div className="bg-gray-800/50 rounded-lg border border-gray-700 p-4">
-          <h4 className="text-white font-medium mb-3 flex items-center">
-            <FiEdit3 className="mr-2 text-purple-400" />
-            AI File Organization
-          </h4>
+      
 
-          <div className="flex gap-2 flex-wrap">
-            <button
-              onClick={handleAiRenamePreview}
-              disabled={isGeneratingSuggestions}
-              className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 text-white rounded-lg transition-colors"
-            >
-              {isGeneratingSuggestions ? (
-                <FiLoader className="w-4 h-4 animate-spin" />
-              ) : (
-                <FiEdit3 className="w-4 h-4" />
-              )}
-              {isGeneratingSuggestions ? 'Generating...' : 'AI Rename Preview'}
-            </button>
+  {selectedItems.size > 0 && (
+  <div className="bg-gray-800/50 rounded-lg border border-gray-700 p-4">
+    <h4 className="text-white font-medium mb-3 flex items-center">
+      <FiEdit3 className="mr-2 text-purple-400" />
+      AI File Organization
+    </h4>
 
-            {aiSuggestions && (
-              <button
-                onClick={handleExecuteRename}
-                disabled={isExecutingRename}
-                className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 text-white rounded-lg transition-colors"
-              >
-                {isExecutingRename ? (
-                  <FiLoader className="w-4 h-4 animate-spin" />
-                ) : (
-                  <FiPlay className="w-4 h-4" />
-                )}
-                {isExecutingRename ? 'Executing...' : 'Execute Rename'}
-              </button>
-            )}
+    {/* Custom Naming Pattern Input */}
+    <div className="mb-4 w-full">
+      <label htmlFor="namingPattern" className="block text-sm text-gray-300 mb-1">
+        Custom File Naming Pattern (optional)
+      </label>
+      <input
+        type="text"
+        id="namingPattern"
+        value={namingPattern}
+        onChange={(e) => setNamingPattern(e.target.value)}
+        placeholder="[Company] [Date] [Name]"
+        className="w-full px-3 py-2 rounded bg-gray-900 text-white border border-gray-700 focus:outline-none focus:border-purple-500"
+      />
+    </div>
 
-            <button
-              onClick={() => {
-                setAiSuggestions(null);
-                setExecutionResults(null);
-              }}
-              className="flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors"
-            >
-              Clear Results
-            </button>
-          </div>
-        </div>
+    {/* AI Buttons */}
+    <div className="flex gap-2 flex-wrap">
+      <button
+        onClick={handleAiRenamePreview}
+        disabled={isGeneratingSuggestions}
+        className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 text-white rounded-lg transition-colors"
+      >
+        {isGeneratingSuggestions ? (
+          <FiLoader className="w-4 h-4 animate-spin" />
+        ) : (
+          <FiEdit3 className="w-4 h-4" />
+        )}
+        {isGeneratingSuggestions ? 'Generating...' : 'AI Rename Preview'}
+      </button>
+
+      {aiSuggestions && (
+        <button
+          onClick={handleExecuteRename}
+          disabled={isExecutingRename}
+          className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 text-white rounded-lg transition-colors"
+        >
+          {isExecutingRename ? (
+            <FiLoader className="w-4 h-4 animate-spin" />
+          ) : (
+            <FiPlay className="w-4 h-4" />
+          )}
+          {isExecutingRename ? 'Executing...' : 'Execute Rename'}
+        </button>
       )}
+
+      <button
+        onClick={() => {
+          setAiSuggestions(null);
+          setExecutionResults(null);
+        }}
+        className="flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors"
+      >
+        Clear Results
+      </button>
+    </div>
+  </div>
+)}
+
 
       {/* Execution Results */}
       {executionResults && (
