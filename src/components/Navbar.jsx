@@ -129,14 +129,14 @@ export default function Navbar() {
                 onClick={() => handleNavigation('/')}
                 className="flex items-center space-x-3 group"
               >
-                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                <div className="w-8 h-8 bg-gradient-to-br  from-purple-900   to-pink-600    rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
                   <img 
                     src="/logo.png" 
                     alt="Logo" 
                     className="w-6 h-6 object-cover rounded-full"
                   />
                 </div>
-                <span className="hidden sm:block text-lg font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                <span className="hidden sm:block text-lg font-bold bg-gradient-to-r from-purple-900   to-pink-600 bg-clip-text text-transparent">
                   DRIVE-AI
                 </span>
               </button>
@@ -147,10 +147,9 @@ export default function Navbar() {
                 {isAuthenticated && (
                   <button 
                     onClick={() => handleNavigation('/dashboard')}
-                    className="flex items-center space-x-2  hover:text-purple-300 transition"
+                    className="flex items-center space-x-2  hover:text-purple-700 transition"
                   >
-                    <FiFolder size={20} />
-                    <span>Dashboard</span>
+                    <span className='font-bold'>Dashboard</span>
                   </button>
                 )}
               </div>
@@ -237,7 +236,7 @@ export default function Navbar() {
                     className="flex items-center space-x-3 w-full px-4 py-3 rounded-xl hover:bg-white/10 transition-all duration-200 text-gray-300 hover:text-white group"
                   >
                     <FiFolder size={20} className="group-hover:scale-110 transition-transform" />
-                    <span className="font-medium">Dashboard</span>
+                    <span className="font-bold">Dashboard</span>
                   </button>
                 )}
               </div>

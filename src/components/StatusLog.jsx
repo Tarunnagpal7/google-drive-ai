@@ -11,7 +11,7 @@ export default function StatusLog({ messages }) {
           messages.map((msg, index) => (
             <div key={index} className="mb-2">
               <span className="text-gray-400">[{new Date().toLocaleTimeString()}]</span>{' '}
-              <span>{msg}</span>
+              <span className="text-white">{msg}</span>
             </div>
           ))
         )}

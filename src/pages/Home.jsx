@@ -37,8 +37,8 @@ export default function Home() {
               className="glass p-6 rounded-xl hover:shadow-lg transition"
             >
               <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-300">{feature.description}</p>
+              <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+              <p className="text-black font-semibold">{feature.description}</p>
             </motion.div>
           ))}
         </div>
@@ -48,13 +48,14 @@ export default function Home() {
         <h2 className="text-3xl font-bold mb-6">How It Works</h2>
         <div className="space-y-8">
           {[
-            '1. Connect your Google Drive',
-            '2. Let our AI analyze your files',
-            '3. Review suggested organization',
-            '4. Execute changes with one click'
+            ' Connect your Google Drive',
+            ' Select the files, and give name suggestion.',
+            ' Let our AI analyze your files',
+            ' Review suggested organization',
+            ' Execute changes with one click'
           ].map((step, index) => (
             <div key={index} className="flex items-start space-x-4">
-              <div className="bg-purple-600 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+              <div className="bg-gray-600 rounded-full text-white w-8 h-8 flex items-center justify-center flex-shrink-0">
                 {index + 1}
               </div>
               <p className="text-lg">{step}</p>
