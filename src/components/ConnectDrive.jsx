@@ -21,7 +21,7 @@ export default function ConnectDrive({ token }) {
   return (
     <div className="bg-blue-900/30 border border-blue-700 p-6 rounded-xl shadow mb-8">
       <h2 className="text-xl font-semibold mb-2">🔐 Connect to Google Drive</h2>
-      <p className="text-gray-300 mb-4">Grant access to your Drive so AI can organize your files.</p>
+      <p className="text-gray-800 mb-4">Grant access to your Drive so AI can organize your files.</p>
       <button
         onClick={handleConnect}
         disabled={loading}

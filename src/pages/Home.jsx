@@ -48,14 +48,14 @@ export default function Home() {
         <h2 className="text-3xl font-bold mb-6">How It Works</h2>
         <div className="space-y-8">
           {[
-            ' Connect your Google Drive',
+            ' Connect your Google Drive.',
             ' Select the files, and give name suggestion.',
-            ' Let our AI analyze your files',
-            ' Review suggested organization',
-            ' Execute changes with one click'
+            ' Let our AI analyze your files.',
+            ' Review suggested organization.',
+            ' Execute changes with one click.'
           ].map((step, index) => (
             <div key={index} className="flex items-start space-x-4">
-              <div className="bg-gray-600 rounded-full text-white w-8 h-8 flex items-center justify-center flex-shrink-0">
+              <div className="bg-gray-800 rounded-full text-white w-8 h-8 flex items-center justify-center flex-shrink-0">
                 {index + 1}
               </div>
               <p className="text-lg">{step}</p>

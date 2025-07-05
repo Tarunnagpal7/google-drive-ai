@@ -205,9 +205,9 @@ export default function Navbar() {
                   className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition border border-white/10"
                 >
                   {isMenuOpen ? (
-                    <FiX size={20} className="text-white" />
+                    <FiX size={20} className="" />
                   ) : (
-                    <FiMenu size={20} className="text-white" />
+                    <FiMenu size={20} className="" />
                   )}
                 </button>
               </div>

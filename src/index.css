@@ -2,10 +2,10 @@
 
 /* Glass morphism effect */
 .glass {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(240, 139, 237, 0.15);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(243, 131, 131, 0.18);
 }
 
 /* Custom scrollbar */

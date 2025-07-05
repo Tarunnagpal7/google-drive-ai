@@ -100,10 +100,10 @@ export default function Dashboard() {
       >
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-white mb-1">
+            <h1 className="text-3xl font-bold mb-1">
               👋 Welcome {user?.given_name || user?.name}
             </h1>
-            <p className="text-gray-300">Organize your Drive files with AI</p>
+            <p className="text-gray-800">Organize your Drive files with AI</p>
           </div>
         </div>
       </motion.div>
@@ -117,7 +117,7 @@ export default function Dashboard() {
       >
         <div className="mb-3 text-center">
           <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-400/30">
-            <span className="text-white text-sm font-medium">
+            <span className=" text-sm font-medium">
               Follow the steps to organize your files
             </span>
           </div>
@@ -137,7 +137,7 @@ export default function Dashboard() {
                 {step.icon}
               </div>
               <div className="flex-1">
-                <div className="font-medium text-gray-100">
+                <div className="font-medium text-gray-800">
                   {step.label}
                 </div>
                 {/* <div className="text-sm text-gray-100">
@@ -164,7 +164,7 @@ export default function Dashboard() {
               </div>
               
               {/* Step Label */}
-              <div className="mt-3 text-center text-gray-100">
+              <div className="mt-3 text-center text-gray-800">
                 <div className="font-medium text-sm">{step.label}</div>
                 {/* <div className="text-xs mt-1 px-2 max-w-24 leading-tight">
                   {step.description}
